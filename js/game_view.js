@@ -29,6 +29,9 @@ class GameView {
     window.setInterval(() => {
       this.player.surprise_text.src = './images/empty.png'
     }, 2000);
+
+    let audio = document.getElementById("audio");
+    audio.play();
             
   }
 

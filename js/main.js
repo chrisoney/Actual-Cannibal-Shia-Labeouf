@@ -15,7 +15,7 @@ function next(){
   nextScreen.style.visibility = "visible";
   setTimeout( () => {
     document.addEventListener("keydown", run)
-  }, 2000);
+  }, 500);
 }
 
 function win(){
@@ -24,16 +24,18 @@ function win(){
   level = 1;
   setTimeout( () => {
     document.addEventListener("keydown", run)
-  }, 2000);
+  }, 500);
 }
 
 function lose(){
+  let loseMsg = document.getElementById("lose-level");
+  loseMsg.innerHTML = `You made it to level ${level}, but then`;
   const loseScreen = document.getElementById('lose-screen');
   loseScreen.style.visibility = "visible";
   level = 1;
   setTimeout( () => {
     document.addEventListener("keydown", run)
-  }, 2000);
+  }, 500);
 }
 
 function run() {
