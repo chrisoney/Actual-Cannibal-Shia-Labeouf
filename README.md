@@ -30,4 +30,4 @@ Each level is randomly generated, though the size increases at a rate of 3 rows 
 **Previews**
 
 Distracting Shia with some "meat" the player picked up:
-![Distraction](distract.gif)
+![Distraction]('readme_gifs/distract.gif')
