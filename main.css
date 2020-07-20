@@ -1,0 +1,143 @@
+#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'VT323', monospace;
+  background-color: black;
+  color: grey;
+}
+
+#title {
+  margin-top: 10px;
+  width: 700px;
+  height: auto;
+}
+
+#canvas {
+  border: 1px solid black;
+}
+
+
+h2 {
+  font-size: 30px;
+}
+
+#game {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+#controls{
+  font-size: 24px;
+  margin-left: 10px;
+  height: 512px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player-info{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+#player-info h2 {
+  text-align: center;
+}
+
+#inventory {
+  width: 150px;
+  height: 230px;
+}
+
+#health {
+  display: flex;
+  flex-direction: column;
+}
+
+#hearts {
+  display: flex;
+  justify-content: center;
+}
+
+#hearts img {
+  margin-top: 10px;
+  width: 45px;
+  height: auto;
+}
+
+#items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#key img {
+  width: 50px;
+  height: 50px;
+}
+
+#limb img {
+  width: 50px;
+  height: 50px;
+}
+
+#key, #limb{
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
+
+#center {
+  width: 514px;
+  height: 514px;
+}
+
+#canvas-area {
+  position: relative;
+}
+
+.screen {
+  position: absolute;
+  background: black;
+  width: 514px;
+  height: 514px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+#lose-screen, #win-screen, #next-screen {
+  visibility: hidden;
+}
+
+.control-title {
+  margin-top: 20px;
+  font-size: 25px;
+}
+
+.wasd, .arrow {
+  width: 100px;
+  height: 60px;
+  margin-top: 10px;
+}
+
+.spacebar {
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.distract, .mute {
+  width: 33px;
+  height: 33px;
+  margin-top: 10px;
+}
+
+#tips {
+  font-size: 20px;
+}

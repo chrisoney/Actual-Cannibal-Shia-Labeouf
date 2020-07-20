@@ -1,0 +1,24 @@
+{
+  "name": "actual-cannibal-shia-labeouf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "engines": {
+    "node": "6.2.1",
+    "npm": "3.9.3"
+  },
+  "scripts": {
+    "postinstall": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.15.0"
+  }
+}

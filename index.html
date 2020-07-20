@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./bundle.js" charset="utf-8"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <title>Actual Cannibal Shia Labeouf</title>
+</head>
+<body id="body">
+  <!-- <h1>Actual Cannibal Shia Labeouf</h1> -->
+  <img id="title" src="https://fontmeme.com/permalink/200717/b8d5ca7bbc353a8e0e36329e7e30d800.png" alt="bleeding-pixels-font" border="0">
+  <div id="game">
+    <div id="player-info">
+      <div id="inventory">
+        <h2>Inventory</h2>
+        <ul id="items">
+          <li id="key"></li>
+          <li id="limb"></li>
+        </ul>
+      </div>
+      <div id="health">
+        <h2>Lives</h2>
+        <div id="hearts"></div>
+      </div>
+    </div>
+    <div id="center">
+      <div id="canvas-area">
+        <div id="intro-screen" class="screen">
+          <div class="screen-text">
+            <h1>Welcome to Actual Cannibal Shia Labeouf!</h1>
+            <p>Your goal is to find your key and make it to your car.</p>
+            <p>However, you'll need to avoid Shia while you search.</p>
+            <p>Good luck and be careful.</p>
+            <p>Press any key to continue</p>
+          </div>
+        </div>
+        <div id="lose-screen" class="screen">
+          <div class="screen-text">
+            <h1>You have been eaten by Hollywood Superstar Shia Labeouf.</h1>
+            <h3>Press any key to start over</h3>
+          </div>
+        </div>
+        <div id="win-screen" class="screen">
+          <div class="screen-text">
+            <h1>You did it.</h1>
+            <h1>You are finally safe from Shia Labeouf.</h1>
+            <h3>Press any key to start over</h3>
+          </div>
+        </div>
+        <div id="next-screen" class="screen">
+          <div class="screen-text">
+            <p id="level-message"></p>
+            <p>However, your trials are not over.</p>
+            <p>Press any key to continue to the next level</p>
+          </div>
+        </div>
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+    <div id="controls">
+      <h2>Controls</h2>
+      <p class="control-title">Movement</p>
+      <img src="./images/wasd.png" class="wasd"/>
+      <img src="./images/arrow.png" class="arrow"/>
+      <p class="control-title">Interact/Search</p>
+      <img src="./images/spacebar.png" class="spacebar">
+      <p class="control-title">Distract Shia</p>
+      <img src="./images/e-button.png" class="distract">
+      <p class="control-title">Play/Pause Music</p>
+      <img src="./images/m-button.png" class="mute">
+    </div>
+  </div>
+  <div id="tips"></div>
+  <audio id="audio" controls autoplay hidden loop>
+    <source src="music/rob_cantor.mp3" type="audio/mpeg">
+  </audio>
+</body>
+</html>
