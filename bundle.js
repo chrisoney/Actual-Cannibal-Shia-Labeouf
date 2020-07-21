@@ -75,7 +75,7 @@
 	
 	function lose(){
 	  let loseMsg = document.getElementById("lose-level");
-	  loseMsg.innerHTML = `You made it to level ${level}, but then`;
+	  loseMsg.innerHTML = `You made it to level ${level}, but then you`;
 	  const loseScreen = document.getElementById('lose-screen');
 	  loseScreen.style.visibility = "visible";
 	  level = 1;
