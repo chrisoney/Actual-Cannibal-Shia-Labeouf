@@ -670,22 +670,22 @@
 	    const FACING_LEFT = 1;
 	    let hasMoved = false;
 	    const MOVEMENT_SPEED = 2;
-	    if (this.key_presses.w || this.key_presses.ArrowUp) {
+	    if (this.key_presses.w || this.key_presses.W || this.key_presses.ArrowUp) {
 	      this.collide(0, -MOVEMENT_SPEED);
 	      hasMoved = true;
 	      if (this.shia && this.screenY === 256){this.shia.sY+=MOVEMENT_SPEED};
-	    } else if (this.key_presses.s || this.key_presses.ArrowDown) {
+	    } else if (this.key_presses.s || this.key_presses.S || this.key_presses.ArrowDown) {
 	      this.collide(0, MOVEMENT_SPEED);
 	      hasMoved = true;
 	      if (this.shia && this.screenY === 256){this.shia.sY-=MOVEMENT_SPEED};
 	    }
 	
-	    if (this.key_presses.a || this.key_presses.ArrowLeft) {
+	    if (this.key_presses.a || this.key_presses.A || this.key_presses.ArrowLeft) {
 	      this.collide(-MOVEMENT_SPEED, 0)
 	      this.currentDirection = FACING_LEFT;
 	      hasMoved = true;
 	      if (this.shia && this.screenX === 256){this.shia.sX+=MOVEMENT_SPEED};
-	    } else if (this.key_presses.d || this.key_presses.ArrowRight) {
+	    } else if (this.key_presses.d || this.key_presses.D || this.key_presses.ArrowRight) {
 	      this.collide(MOVEMENT_SPEED, 0)
 	      this.currentDirection = FACING_RIGHT;
 	      hasMoved = true;
