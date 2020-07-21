@@ -2,10 +2,34 @@ const GameView = require("./game_view.js");
 
 // Initialize canvas and display splash
 document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("keydown", run);
+  document.addEventListener("keydown", tutorial);
+  playPause();
 });
 
 let level = 1;
+
+function playPause(){
+  document.addEventListener("keydown", (e) => {
+    let audio = document.getElementById("audio");
+    if (e.key === 'm') {
+      if (audio.paused){
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  });
+}
+
+function tutorial(){
+  document.getElementById("audio").play();
+  const tipScreen = document.getElementById('tip-screen');
+  tipScreen.style.visibility = "visible";
+  setTimeout( () => {
+    document.addEventListener("keydown", run)
+  }, 500);
+  document.removeEventListener("keydown", tutorial);
+}
 
 function next(){
   const nextScreen = document.getElementById('next-screen');
@@ -47,7 +71,7 @@ function run() {
   for (let screen of game_screens) {
     screen.style.visibility = "hidden";
   }
-  
+
   window.GameView = new GameView(canvas,level, win, lose, next);
   window.GameView.start();
   document.removeEventListener("keydown", run);

@@ -48,10 +48,34 @@
 	
 	// Initialize canvas and display splash
 	document.addEventListener("DOMContentLoaded", () => {
-	  document.addEventListener("keydown", run);
+	  document.addEventListener("keydown", tutorial);
+	  playPause();
 	});
 	
 	let level = 1;
+	
+	function playPause(){
+	  document.addEventListener("keydown", (e) => {
+	    let audio = document.getElementById("audio");
+	    if (e.key === 'm') {
+	      if (audio.paused){
+	        audio.play();
+	      } else {
+	        audio.pause();
+	      }
+	    }
+	  });
+	}
+	
+	function tutorial(){
+	  document.getElementById("audio").play();
+	  const tipScreen = document.getElementById('tip-screen');
+	  tipScreen.style.visibility = "visible";
+	  setTimeout( () => {
+	    document.addEventListener("keydown", run)
+	  }, 500);
+	  document.removeEventListener("keydown", tutorial);
+	}
 	
 	function next(){
 	  const nextScreen = document.getElementById('next-screen');
@@ -93,7 +117,7 @@
 	  for (let screen of game_screens) {
 	    screen.style.visibility = "hidden";
 	  }
-	  
+	
 	  window.GameView = new GameView(canvas,level, win, lose, next);
 	  window.GameView.start();
 	  document.removeEventListener("keydown", run);
@@ -135,9 +159,7 @@
 	      this.player.surprise_text.src = './images/empty.png'
 	    }, 2000);
 	
-	    let audio = document.getElementById("audio");
-	    audio.play();
-	            
+	    this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
 	  }
 	
 	  bindKeyHandlers() {
@@ -148,16 +170,7 @@
 	    window.addEventListener("keyup", (e) => {
 	      this.player.key_presses[e.key] = false;
 	    });
-	    window.addEventListener("keydown", (e) => {
-	      let audio = document.getElementById("audio");
-	      if (e.key === 'm') {
-	        if (audio.paused){
-	          audio.play();
-	        } else {
-	          audio.pause();
-	        }
-	      }
-	    });
+	
 	    window.addEventListener("keydown", (e) => {
 	      if (e.key === ' ') {
 	        this.player.search();

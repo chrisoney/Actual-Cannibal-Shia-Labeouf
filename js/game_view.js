@@ -30,9 +30,7 @@ class GameView {
       this.player.surprise_text.src = './images/empty.png'
     }, 2000);
 
-    let audio = document.getElementById("audio");
-    audio.play();
-            
+    this.bindKeyHandlers = this.bindKeyHandlers.bind(this);
   }
 
   bindKeyHandlers() {
@@ -43,16 +41,7 @@ class GameView {
     window.addEventListener("keyup", (e) => {
       this.player.key_presses[e.key] = false;
     });
-    window.addEventListener("keydown", (e) => {
-      let audio = document.getElementById("audio");
-      if (e.key === 'm') {
-        if (audio.paused){
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      }
-    });
+
     window.addEventListener("keydown", (e) => {
       if (e.key === ' ') {
         this.player.search();
