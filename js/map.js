@@ -10,16 +10,7 @@ class Map {
     this.tiles = new Image();
     this.tiles.src = './images/sprite-background.png';
 
-    this.generateLevels(1);
-    this.generateLevels(2);
-    this.generateLevels(3);
-    this.generateLevels(4);
-    this.generateLevels(5);
-    this.generateLevels(6);
-    this.generateLevels(7);
-    this.generateLevels(8);
-    this.generateLevels(9);
-    this.generateLevels(10);
+    this.generateLevels(level);
 
     this.camera = new Camera(level, TileMaps, 512, 512);
     this.player = new Player(level, TileMaps, 100, 100, this.ctx);
