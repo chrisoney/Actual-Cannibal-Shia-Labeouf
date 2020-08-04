@@ -68,7 +68,7 @@
 	}
 	
 	function tutorial(){
-	  document.getElementById("audio").play();
+	  // document.getElementById("audio").play();
 	  const tipScreen = document.getElementById('tip-screen');
 	  tipScreen.style.visibility = "visible";
 	  setTimeout( () => {
@@ -117,7 +117,8 @@
 	  for (let screen of game_screens) {
 	    screen.style.visibility = "hidden";
 	  }
-	
+	  let audio = document.getElementById("audio");
+	  audio.play();
 	  window.GameView = new GameView(canvas,level, win, lose, next);
 	  window.GameView.start();
 	  document.removeEventListener("keydown", run);
@@ -240,16 +241,7 @@
 	    this.tiles = new Image();
 	    this.tiles.src = './images/sprite-background.png';
 	
-	    this.generateLevels(1);
-	    this.generateLevels(2);
-	    this.generateLevels(3);
-	    this.generateLevels(4);
-	    this.generateLevels(5);
-	    this.generateLevels(6);
-	    this.generateLevels(7);
-	    this.generateLevels(8);
-	    this.generateLevels(9);
-	    this.generateLevels(10);
+	    this.generateLevels(level);
 	
 	    this.camera = new Camera(level, TileMaps, 512, 512);
 	    this.player = new Player(level, TileMaps, 100, 100, this.ctx);

@@ -53,7 +53,7 @@ function win(){
 
 function lose(){
   let loseMsg = document.getElementById("lose-level");
-  loseMsg.innerHTML = `You made it to level ${level}, but then you`;
+  loseMsg.innerHTML = `You made it to Level ${level}, but then you`;
   const loseScreen = document.getElementById('lose-screen');
   loseScreen.style.visibility = "visible";
   level = 1;
@@ -71,7 +71,6 @@ function run() {
   for (let screen of game_screens) {
     screen.style.visibility = "hidden";
   }
-
   window.GameView = new GameView(canvas,level, win, lose, next);
   window.GameView.start();
   document.removeEventListener("keydown", run);
