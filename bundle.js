@@ -68,7 +68,7 @@
 	}
 	
 	function tutorial(){
-	  // document.getElementById("audio").play();
+	  document.getElementById("audio").play();
 	  const tipScreen = document.getElementById('tip-screen');
 	  tipScreen.style.visibility = "visible";
 	  setTimeout( () => {
@@ -99,7 +99,7 @@
 	
 	function lose(){
 	  let loseMsg = document.getElementById("lose-level");
-	  loseMsg.innerHTML = `You made it to level ${level}, but then you`;
+	  loseMsg.innerHTML = `You made it to Level ${level}, but then you`;
 	  const loseScreen = document.getElementById('lose-screen');
 	  loseScreen.style.visibility = "visible";
 	  level = 1;
@@ -112,13 +112,10 @@
 	  const canvas = document.getElementById("canvas");
 	  canvas.width = 512;
 	  canvas.height = 512;
-	
 	  const game_screens = document.querySelectorAll('.screen');
 	  for (let screen of game_screens) {
 	    screen.style.visibility = "hidden";
 	  }
-	  let audio = document.getElementById("audio");
-	  audio.play();
 	  window.GameView = new GameView(canvas,level, win, lose, next);
 	  window.GameView.start();
 	  document.removeEventListener("keydown", run);

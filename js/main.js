@@ -4,7 +4,6 @@ const GameView = require("./game_view.js");
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", tutorial);
   playPause();
-  document.getElementById("audio").play();
 });
 
 let level = 1;
@@ -23,6 +22,7 @@ function playPause(){
 }
 
 function tutorial(){
+  document.getElementById("audio").play();
   const tipScreen = document.getElementById('tip-screen');
   tipScreen.style.visibility = "visible";
   setTimeout( () => {
