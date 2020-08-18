@@ -6,6 +6,8 @@ A tile-based escape game based on the tabletop system by the same name, which wa
 
 Escape each randomly-generated level by searching through logs and locating your keys. Find medicine to heal yourself and "meat" to distract Shia Labeouf. Be wary, for Shia is always ready to attack if you're unlucky. Once you've located your keys, find your car and escape to the next level.
 
+<img src="./images/gifs/full.png" width=600 height=auto>
+
 ----------------------
 
 ### Technologies
@@ -31,3 +33,6 @@ Each level is randomly generated, though the size increases at a rate of 3 rows 
 
 Distracting Shia with some "meat" the player picked up:
 ![](https://i.imgur.com/snlDCdC.gif)
+
+Levels are dynamically generated
+<img src="./images/gifs/next-level.gif" width=600 height=auto>
