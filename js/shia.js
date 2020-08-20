@@ -48,7 +48,7 @@ class Shia {
 
     const FRAME_LIMIT = 10;
     let hasMoved = false;
-    const MOVEMENT_SPEED = 2 + (0.5 * this.level);
+    const MOVEMENT_SPEED = 2 + (0.8 * this.level);
 
     if (this.currentDirection === 0){
       this.sX = this.sX + MOVEMENT_SPEED;
