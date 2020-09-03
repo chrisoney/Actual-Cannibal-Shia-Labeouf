@@ -38,7 +38,9 @@ class Player {
     this.limbs = 0;
 
     this.surprise_text = new Image();
-    this.surprise_text.src = "./images/empty.png"
+    this.surprise_text.src = "./images/empty.png";
+
+    this.colliding = false;
   }
 
   drawFrame(frameX, frameY, canvasX, canvasY) {
@@ -68,6 +70,9 @@ class Player {
         this.map.isSolidXY(this.level, left, bottom);
     if (!collision){
       this.position = {x: old_pos.x, y: old_pos.y};
+      this.colliding = false;
+    } else {
+      this.colliding = true;
     }
 
     old_pos = {x: this.position.x, y: this.position.y};
@@ -86,6 +91,9 @@ class Player {
     this.map.isSolidXY(this.level, left, bottom);
     if (!collision){
       this.position = {x: old_pos.x, y: old_pos.y};
+      this.colliding = false;
+    } else {
+      this.colliding = true;
     }
   }
 
@@ -189,23 +197,23 @@ class Player {
     if (this.key_presses.w || this.key_presses.W || this.key_presses.ArrowUp) {
       this.collide(0, -MOVEMENT_SPEED);
       hasMoved = true;
-      if (this.shia && this.screenY === 256){this.shia.sY+=MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY+=MOVEMENT_SPEED};
     } else if (this.key_presses.s || this.key_presses.S || this.key_presses.ArrowDown) {
       this.collide(0, MOVEMENT_SPEED);
       hasMoved = true;
-      if (this.shia && this.screenY === 256){this.shia.sY-=MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY-=MOVEMENT_SPEED};
     }
 
     if (this.key_presses.a || this.key_presses.A || this.key_presses.ArrowLeft) {
       this.collide(-MOVEMENT_SPEED, 0)
       this.currentDirection = FACING_LEFT;
       hasMoved = true;
-      if (this.shia && this.screenX === 256){this.shia.sX+=MOVEMENT_SPEED};
+      if (this.shia && !this.colliding &&this.screenX === 256){this.shia.sX+=MOVEMENT_SPEED};
     } else if (this.key_presses.d || this.key_presses.D || this.key_presses.ArrowRight) {
       this.collide(MOVEMENT_SPEED, 0)
       this.currentDirection = FACING_RIGHT;
       hasMoved = true;
-      if (this.shia && this.screenX === 256){this.shia.sX-=MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenX === 256){this.shia.sX-=MOVEMENT_SPEED};
     }
 
 

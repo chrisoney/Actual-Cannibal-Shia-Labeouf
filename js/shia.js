@@ -18,9 +18,9 @@ class Shia {
 
     this.mapMax = map.levels[level].cols * map.tsize;
     if (this.currentDirection === 0){
-      this.sX = Math.max(pX - 560, 0);
+      this.sX = Math.max(pX - 256, 0);
     } else {
-      this.sX = Math.min(pX + 512, this.mapMax - 5);
+      this.sX = Math.min(pX + 256, this.mapMax - 1);
     }
     this.sY = pY;
 
