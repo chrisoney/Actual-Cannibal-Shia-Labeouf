@@ -45,11 +45,13 @@ class GameView {
     window.addEventListener("keydown", (e) => {
       if (e.key === ' ') {
         this.player.search();
-        this.tipScroll();
       }
     });
     window.addEventListener("keydown", (e) => {
       if (e.key === 'e') {this.player.tossLimb()}
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === 't') {this.tipScroll();}
     });
   }
 

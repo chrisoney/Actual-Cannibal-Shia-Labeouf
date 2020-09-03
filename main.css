@@ -142,6 +142,10 @@ h2 {
   font-size: 20px;
 }
 
+#tips > img {
+  max-width: 512px;
+}
+
 .footer {
   position: absolute;
   bottom: 10px;

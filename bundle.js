@@ -172,11 +172,13 @@
 	    window.addEventListener("keydown", (e) => {
 	      if (e.key === ' ') {
 	        this.player.search();
-	        this.tipScroll();
 	      }
 	    });
 	    window.addEventListener("keydown", (e) => {
 	      if (e.key === 'e') {this.player.tossLimb()}
+	    });
+	    window.addEventListener("keydown", (e) => {
+	      if (e.key === 't') {this.tipScroll();}
 	    });
 	  }
 	
@@ -585,10 +587,14 @@
 	      this.has_escaped = true;
 	    } else if (search.includes('no keys')){
 	      this.text_box.src = "./images/no_keys.png";
-	    } else if (search.includes('surprise')){
+	    } else if (search.includes('surprise') && this.shia === false){
 	      this.shia = new Shia(this.level, this.map, this.screenX, this.screenY, this.ctx, this);
 	      this.shia_surprise = true;
-	      this.surprise_text.src = './images/shia_surprise.png'
+	      document.getElementById("tips").innerHTML = `<img src="./images/shia_surprise.png" alt="shia"/>`;
+	      window.setTimeout(() => {
+	        this.shia_surpise = false;
+	        document.getElementById("tips").innerHTML = "";
+	      }, 2000);
 	    } else if (search.includes('medicine')){
 	      if (this.lives < 3){ this.lives++; }
 	      this.text_box.src = "./images/medicine.png";
@@ -761,7 +767,7 @@
 	
 	    const FRAME_LIMIT = 10;
 	    let hasMoved = false;
-	    const MOVEMENT_SPEED = 2 + (0.5 * this.level);
+	    const MOVEMENT_SPEED = 2 + (0.8 * this.level);
 	
 	    if (this.currentDirection === 0){
 	      this.sX = this.sX + MOVEMENT_SPEED;
