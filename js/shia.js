@@ -20,7 +20,7 @@ class Shia {
     if (this.currentDirection === 0){
       this.sX = Math.max(pX - 256, 0);
     } else {
-      this.sX = Math.min(pX + 256, this.mapMax - 1);
+      this.sX = Math.min(pX + 256, this.mapMax);
     }
     this.sY = pY;
 

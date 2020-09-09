@@ -170,7 +170,7 @@
 	    });
 	
 	    window.addEventListener("keydown", (e) => {
-	      if (e.key === ' ') {
+	      if (e === ' ') {
 	        this.player.search();
 	      }
 	    });
@@ -747,7 +747,7 @@
 	    if (this.currentDirection === 0){
 	      this.sX = Math.max(pX - 256, 0);
 	    } else {
-	      this.sX = Math.min(pX + 256, this.mapMax - 1);
+	      this.sX = Math.min(pX + 256, this.mapMax);
 	    }
 	    this.sY = pY;
 	
