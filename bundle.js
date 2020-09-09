@@ -170,7 +170,7 @@
 	    });
 	
 	    window.addEventListener("keydown", (e) => {
-	      if (e === ' ') {
+	      if (e.key === ' ') {
 	        this.player.search();
 	      }
 	    });
