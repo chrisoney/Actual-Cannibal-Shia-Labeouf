@@ -45,6 +45,10 @@ class GameView {
     window.addEventListener("keydown", (e) => {
       if (e.key === ' ') {
         this.player.search();
+<<<<<<< HEAD
+=======
+        console.log('searched');
+>>>>>>> fix space
       }
     });
     window.addEventListener("keydown", (e) => {
