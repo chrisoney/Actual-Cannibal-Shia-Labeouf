@@ -43,7 +43,14 @@ class GameView {
     });
 
     window.addEventListener("keydown", (e) => {
+<<<<<<< HEAD
       if (e.key === ' ') this.player.search();
+=======
+      if (e.key === ' ') {
+        this.player.search();
+        console.log('searched');
+      }
+>>>>>>> fix space
     });
     window.addEventListener("keydown", (e) => {
       if (e.key === 'e') {this.player.tossLimb()}
