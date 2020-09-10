@@ -43,6 +43,7 @@ class GameView {
     });
 
     window.addEventListener("keydown", (e) => {
+      console.log(e.key);
       if (e.key === ' ') {
         this.player.search();
         console.log('searched')
