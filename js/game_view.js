@@ -43,6 +43,11 @@ class GameView {
     });
 
     window.addEventListener("keydown", (e) => {
+<<<<<<< HEAD
+=======
+      console.log(e.key);
+      console.log(e.key)
+>>>>>>> trying something else to fix space issue
       if (e.key === ' ') {
         this.player.search();
 <<<<<<< HEAD
