@@ -27,12 +27,10 @@ class Shia {
         this.sY = pY;
         break;
       case 2:
-        console.log('up');
         this.sX = pX;
         this.sY = Math.max(pY - 256, 0);
         break;
       case 3:
-        console.log('down');
         this.sX = pX;
         this.sY = Math.min(pY + 256, this.mapMax);
         break;
