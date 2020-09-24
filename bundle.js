@@ -172,7 +172,6 @@
 	    window.addEventListener("keydown", (e) => {
 	      if (e.key === ' ') {
 	        this.player.search();
-	        console.log('searched')
 	      }
 	    });
 	    window.addEventListener("keydown", (e) => {
@@ -742,15 +741,37 @@
 	    this.cycle_loop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 	    this.currentLoopIndex = 0;
 	    this.frameCount = 0;
-	    this.currentDirection = Math.floor(Math.random() * 2);
+	    this.currentDirection = Math.floor(Math.random() * 4);
 	
 	    this.mapMax = map.levels[level].cols * map.tsize;
-	    if (this.currentDirection === 0){
-	      this.sX = Math.max(pX - 256, 0);
-	    } else {
-	      this.sX = Math.min(pX + 256, this.mapMax);
+	    switch(this.currentDirection){
+	      case 0:
+	        this.sX = Math.max(pX - 256, 0);
+	        this.sY = pY;
+	        break;
+	      case 1:
+	        this.sX = Math.min(pX + 256, this.mapMax);
+	        this.sY = pY;
+	        break;
+	      case 2:
+	        console.log('up');
+	        this.sX = pX;
+	        this.sY = Math.max(pY - 256, 0);
+	        break;
+	      case 3:
+	        console.log('down');
+	        this.sX = pX;
+	        this.sY = Math.min(pY + 256, this.mapMax);
+	        break;
+	      default:
+	        break;
 	    }
-	    this.sY = pY;
+	    // if (this.currentDirection === 0){
+	    //   this.sX = Math.max(pX - 256, 0);
+	    // } else {
+	    //   this.sX = Math.min(pX + 256, this.mapMax);
+	    // }
+	    // this.sY = pY;
 	
 	    this.width = 18;
 	    this.height = 32;
@@ -770,7 +791,7 @@
 	  }
 	
 	  shiaGameLoop(){
-	    if (this.sX < 0 || this.sX > this.mapMax){
+	    if (this.sX < 0 || this.sX > this.mapMax || this.sY < 0 || this.sY > this.mapMax){
 	      this.player.shia_surprise = false;
 	    }
 	
@@ -778,13 +799,33 @@
 	    let hasMoved = false;
 	    const MOVEMENT_SPEED = 2 + (0.8 * this.level);
 	
-	    if (this.currentDirection === 0){
-	      this.sX = this.sX + MOVEMENT_SPEED;
-	      hasMoved = true;
-	    } else {
-	      this.sX =this.sX - MOVEMENT_SPEED;
-	      hasMoved = true;
+	    switch(this.currentDirection){
+	      case 0:
+	        this.sX = this.sX + MOVEMENT_SPEED;
+	        hasMoved = true;
+	        break;
+	      case 1:
+	        this.sX = this.sX - MOVEMENT_SPEED;
+	        hasMoved = true;
+	        break;
+	      case 2:
+	        this.sY = this.sY + MOVEMENT_SPEED;
+	        hasMoved = true;
+	        break;
+	      case 3:
+	        this.sY = this.sY - MOVEMENT_SPEED;
+	        hasMoved = true;
+	        break;
+	      default:
+	        break;
 	    }
+	    // if (this.currentDirection === 0){
+	    //   this.sX = this.sX + MOVEMENT_SPEED;
+	    //   hasMoved = true;
+	    // } else {
+	    //   this.sX =this.sX - MOVEMENT_SPEED;
+	    //   hasMoved = true;
+	    // }
 	
 	    if (hasMoved) {
 	      this.frameCount++;
@@ -798,7 +839,7 @@
 	    }
 	    this.drawFrame(
 	      this.cycle_loop[this.currentLoopIndex],
-	      this.currentDirection,
+	      (this.currentDirection % 2),
 	      this.sX,
 	      this.sY
 	    );
