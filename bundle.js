@@ -522,6 +522,7 @@
 	    this.surprise_text.src = "./images/empty.png";
 	
 	    this.colliding = false;
+	    this.movement_speed = 2;
 	  }
 	
 	  drawFrame(frameX, frameY, canvasX, canvasY) {
@@ -549,11 +550,18 @@
 	        this.map.isSolidXY(this.level, right, top) ||
 	        this.map.isSolidXY(this.level, right, bottom) ||
 	        this.map.isSolidXY(this.level, left, bottom);
-	    if (!collision){
+	    if (collision){
+	      // if (dirX < 0){
+	      //   console.log('up')
+	      //   if (this.shia && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
+	      // } else if (dirX > 0){
+	      //   console.log('down')
+	      //   if (this.shia && this.screenX === 264 ){this.shia.sX += this.movement_speed};
+	      // }
+	      this.colliding = true;
+	    } else {
 	      this.position = {x: old_pos.x, y: old_pos.y};
 	      this.colliding = false;
-	    } else {
-	      this.colliding = true;
 	    }
 	
 	    old_pos = {x: this.position.x, y: this.position.y};
@@ -570,11 +578,16 @@
 	    this.map.isSolidXY(this.level, right, top) ||
 	    this.map.isSolidXY(this.level, right, bottom) ||
 	    this.map.isSolidXY(this.level, left, bottom);
-	    if (!collision){
+	    if (collision){
+	      // if (dirY < 0){
+	      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+	      // } else if (dirY > 0){
+	      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+	      // }
+	      this.colliding = true;
+	    } else {
 	      this.position = {x: old_pos.x, y: old_pos.y};
 	      this.colliding = false;
-	    } else {
-	      this.colliding = true;
 	    }
 	  }
 	
@@ -674,28 +687,27 @@
 	    const FACING_RIGHT = 0;
 	    const FACING_LEFT = 1;
 	    let hasMoved = false;
-	    const MOVEMENT_SPEED = 2;
 	    if (this.key_presses.w || this.key_presses.W || this.key_presses.ArrowUp) {
-	      this.collide(0, -MOVEMENT_SPEED);
+	      this.collide(0, -this.movement_speed);
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY += this.shia.movement_speed};
+	      if (this.shia && !this.colliding && this.screenY === 264){this.shia.sY += this.movement_speed};
 	    } else if (this.key_presses.s || this.key_presses.S || this.key_presses.ArrowDown) {
-	      this.collide(0, MOVEMENT_SPEED);
+	      this.collide(0, this.movement_speed);
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY -= this.shia.movement_speed};
+	      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
 	    }
 	
 	    if (this.key_presses.a || this.key_presses.A || this.key_presses.ArrowLeft) {
-	      this.collide(-MOVEMENT_SPEED, 0)
+	      this.collide(-this.movement_speed, 0)
 	      this.currentDirection = FACING_LEFT;
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX += this.shia.movement_speed};
+	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX += this.movement_speed};
 	    } else if (this.key_presses.d || this.key_presses.D || this.key_presses.ArrowRight) {
-	      this.collide(MOVEMENT_SPEED, 0)
+	      this.collide(this.movement_speed, 0)
 	      this.currentDirection = FACING_RIGHT;
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX -= this.shia.movement_speed};
-	      // if (this.shia && this.colliding) {this.shia.sX -= MOVEMENT_SPEED};
+	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
+	
 	    }
 	
 	
