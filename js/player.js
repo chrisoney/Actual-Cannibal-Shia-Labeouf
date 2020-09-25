@@ -70,13 +70,13 @@ class Player {
         this.map.isSolidXY(this.level, right, bottom) ||
         this.map.isSolidXY(this.level, left, bottom);
     if (collision){
-      // if (dirX < 0){
-      //   console.log('up')
-      //   if (this.shia && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
-      // } else if (dirX > 0){
-      //   console.log('down')
-      //   if (this.shia && this.screenX === 264 ){this.shia.sX += this.movement_speed};
-      // }
+      if (dirX < 0){
+        console.log('up')
+        if (this.shia && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
+      } else if (dirX > 0){
+        console.log('down')
+        if (this.shia && this.screenX === 264 ){this.shia.sX += this.movement_speed};
+      }
       this.colliding = true;
     } else {
       this.position = {x: old_pos.x, y: old_pos.y};
@@ -98,11 +98,11 @@ class Player {
     this.map.isSolidXY(this.level, right, bottom) ||
     this.map.isSolidXY(this.level, left, bottom);
     if (collision){
-      // if (dirY < 0){
-      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-      // } else if (dirY > 0){
-      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-      // }
+      if (dirY < 0){
+        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+      } else if (dirY > 0){
+        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+      }
       this.colliding = true;
     } else {
       this.position = {x: old_pos.x, y: old_pos.y};
