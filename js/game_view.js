@@ -76,6 +76,8 @@ class GameView {
   step () {
 
     this.map.draw(this.ctx);
+    this.map.player.gameLoop();
+
     this.camera.update();
 
     if (this.escaped()){

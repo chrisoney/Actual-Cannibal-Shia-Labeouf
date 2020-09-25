@@ -4,8 +4,8 @@ const Shia = require('./shia')
 class Player {
   constructor(level, map, x, y, ctx) {
     this.level = level;
-    this.game_width = 512;
-    this.game_height = 512;
+    this.game_width = 528;
+    this.game_height = 528;
     this.img = new Image();
     this.img.src = "./images/player-sprite-run.png";
     this.position = {
@@ -197,23 +197,24 @@ class Player {
     if (this.key_presses.w || this.key_presses.W || this.key_presses.ArrowUp) {
       this.collide(0, -MOVEMENT_SPEED);
       hasMoved = true;
-      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY += MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY += this.shia.movement_speed};
     } else if (this.key_presses.s || this.key_presses.S || this.key_presses.ArrowDown) {
       this.collide(0, MOVEMENT_SPEED);
       hasMoved = true;
-      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY -= MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY -= this.shia.movement_speed};
     }
 
     if (this.key_presses.a || this.key_presses.A || this.key_presses.ArrowLeft) {
       this.collide(-MOVEMENT_SPEED, 0)
       this.currentDirection = FACING_LEFT;
       hasMoved = true;
-      if (this.shia && !this.colliding && this.screenX === 256){this.shia.sX += MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX += this.shia.movement_speed};
     } else if (this.key_presses.d || this.key_presses.D || this.key_presses.ArrowRight) {
       this.collide(MOVEMENT_SPEED, 0)
       this.currentDirection = FACING_RIGHT;
       hasMoved = true;
-      if (this.shia && !this.colliding && this.screenX === 256){this.shia.sX -= MOVEMENT_SPEED};
+      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX -= this.shia.movement_speed};
+      // if (this.shia && this.colliding) {this.shia.sX -= MOVEMENT_SPEED};
     }
 
 

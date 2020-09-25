@@ -110,8 +110,8 @@
 	
 	function run() {
 	  const canvas = document.getElementById("canvas");
-	  canvas.width = 512;
-	  canvas.height = 512;
+	  canvas.width = 528;
+	  canvas.height = 528;
 	  const game_screens = document.querySelectorAll('.screen');
 	  for (let screen of game_screens) {
 	    screen.style.visibility = "hidden";
@@ -203,6 +203,8 @@
 	  step () {
 	
 	    this.map.draw(this.ctx);
+	    this.map.player.gameLoop();
+	
 	    this.camera.update();
 	
 	    if (this.escaped()){
@@ -242,7 +244,7 @@
 	
 	    this.generateLevels(level);
 	
-	    this.camera = new Camera(level, TileMaps, 512, 512);
+	    this.camera = new Camera(level, TileMaps, 528, 528);
 	    this.player = new Player(level, TileMaps, 100, 100, this.ctx);
 	    this.camera.follow(this.player);
 	  }
@@ -380,7 +382,6 @@
 	      firstLayer.push(row);
 	    }
 	    TileMaps.levels[level].layers[0] = firstLayer;
-	
 	    let secondLayer = [];
 	    let innerMap = this.addTrees(level);
 	    secondLayer.push(new Array(size).fill(5));
@@ -417,6 +418,7 @@
 	
 	    for (var c = startCol; c <= endCol; c++) {
 	        for (var r = startRow; r <= endRow; r++) {
+	
 	            var tile = TileMaps.getTile(this.level,layer, c, r);
 	            var x = (c - startCol) * TileMaps.tsize + offsetX;
 	            var y = (r - startRow) * TileMaps.tsize + offsetY;
@@ -466,7 +468,7 @@
 	    this.drawLayer(0);
 	    this.drawGrid();
 	    this.drawLayer(1);
-	    this.player.gameLoop();
+	    // this.player.gameLoop();
 	  }
 	
 	}
@@ -483,8 +485,8 @@
 	class Player {
 	  constructor(level, map, x, y, ctx) {
 	    this.level = level;
-	    this.game_width = 512;
-	    this.game_height = 512;
+	    this.game_width = 528;
+	    this.game_height = 528;
 	    this.img = new Image();
 	    this.img.src = "./images/player-sprite-run.png";
 	    this.position = {
@@ -676,23 +678,24 @@
 	    if (this.key_presses.w || this.key_presses.W || this.key_presses.ArrowUp) {
 	      this.collide(0, -MOVEMENT_SPEED);
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY+=MOVEMENT_SPEED};
+	      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY += this.shia.movement_speed};
 	    } else if (this.key_presses.s || this.key_presses.S || this.key_presses.ArrowDown) {
 	      this.collide(0, MOVEMENT_SPEED);
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenY === 256){this.shia.sY-=MOVEMENT_SPEED};
+	      if (this.shia && !this.colliding && this.screenY === 264 ){this.shia.sY -= this.shia.movement_speed};
 	    }
 	
 	    if (this.key_presses.a || this.key_presses.A || this.key_presses.ArrowLeft) {
 	      this.collide(-MOVEMENT_SPEED, 0)
 	      this.currentDirection = FACING_LEFT;
 	      hasMoved = true;
-	      if (this.shia && !this.colliding &&this.screenX === 256){this.shia.sX+=MOVEMENT_SPEED};
+	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX += this.shia.movement_speed};
 	    } else if (this.key_presses.d || this.key_presses.D || this.key_presses.ArrowRight) {
 	      this.collide(MOVEMENT_SPEED, 0)
 	      this.currentDirection = FACING_RIGHT;
 	      hasMoved = true;
-	      if (this.shia && !this.colliding && this.screenX === 256){this.shia.sX-=MOVEMENT_SPEED};
+	      if (this.shia && !this.colliding && this.screenX === 264 ){this.shia.sX -= this.shia.movement_speed};
+	      // if (this.shia && this.colliding) {this.shia.sX -= MOVEMENT_SPEED};
 	    }
 	
 	
@@ -733,8 +736,8 @@
 	    this.ctx = ctx;
 	    this.player = player
 	
-	    this.game_width = 512;
-	    this.game_height = 512;
+	    this.game_width = 528;
+	    this.game_height = 528;
 	    this.img = new Image();
 	    this.img.src = "./images/shia-sprite-run.png";
 	
@@ -746,36 +749,36 @@
 	    this.mapMax = map.levels[level].cols * map.tsize;
 	    switch(this.currentDirection){
 	      case 0:
-	        this.sX = Math.max(pX - 256, 0);
+	        this.sX = Math.max(pX - 264, 0);
 	        this.sY = pY;
 	        break;
 	      case 1:
-	        this.sX = Math.min(pX + 256, this.mapMax);
+	        this.sX = Math.min(pX + 264, this.mapMax);
 	        this.sY = pY;
 	        break;
 	      case 2:
-	        console.log('up');
 	        this.sX = pX;
-	        this.sY = Math.max(pY - 256, 0);
+	        this.sY = Math.max(pY - 264, 0);
 	        break;
 	      case 3:
-	        console.log('down');
 	        this.sX = pX;
-	        this.sY = Math.min(pY + 256, this.mapMax);
+	        this.sY = Math.min(pY + 264, this.mapMax);
 	        break;
 	      default:
 	        break;
 	    }
 	    // if (this.currentDirection === 0){
-	    //   this.sX = Math.max(pX - 256, 0);
+	    //   this.sX = Math.max(pX - 264, 0);
 	    // } else {
-	    //   this.sX = Math.min(pX + 256, this.mapMax);
+	    //   this.sX = Math.min(pX + 264, this.mapMax);
 	    // }
 	    // this.sY = pY;
 	
 	    this.width = 18;
 	    this.height = 32;
 	    
+	    this.movement_speed = 2 + (0.8 * this.level);
+	
 	    this.has_attacked = false;
 	  }
 	
@@ -797,23 +800,23 @@
 	
 	    const FRAME_LIMIT = 10;
 	    let hasMoved = false;
-	    const MOVEMENT_SPEED = 2 + (0.8 * this.level);
+	    // const MOVEMENT_SPEED = 2 + (0.8 * this.level);
 	
 	    switch(this.currentDirection){
 	      case 0:
-	        this.sX = this.sX + MOVEMENT_SPEED;
+	        this.sX = this.sX + this.movement_speed;
 	        hasMoved = true;
 	        break;
 	      case 1:
-	        this.sX = this.sX - MOVEMENT_SPEED;
+	        this.sX = this.sX - this.movement_speed;
 	        hasMoved = true;
 	        break;
 	      case 2:
-	        this.sY = this.sY + MOVEMENT_SPEED;
+	        this.sY = this.sY + this.movement_speed;
 	        hasMoved = true;
 	        break;
 	      case 3:
-	        this.sY = this.sY - MOVEMENT_SPEED;
+	        this.sY = this.sY - this.movement_speed;
 	        hasMoved = true;
 	        break;
 	      default:
@@ -913,7 +916,9 @@
 	  tsize: 66,
 	  levels: { },
 	  getTile: function (level, layer, col, row) {
-	    return this.levels[level].layers[layer][row][col];
+	    if (col < this.levels[level].cols && row < this.levels[level].rows){
+	      return this.levels[level].layers[layer][row][col];
+	    }
 	  },
 	  isSolidXY: function (level, x, y) {
 	      var col = Math.floor((x - 6) / this.tsize);

@@ -64,8 +64,8 @@ function lose(){
 
 function run() {
   const canvas = document.getElementById("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 528;
+  canvas.height = 528;
   const game_screens = document.querySelectorAll('.screen');
   for (let screen of game_screens) {
     screen.style.visibility = "hidden";

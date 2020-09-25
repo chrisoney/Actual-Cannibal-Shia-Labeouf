@@ -12,7 +12,7 @@ class Map {
 
     this.generateLevels(level);
 
-    this.camera = new Camera(level, TileMaps, 512, 512);
+    this.camera = new Camera(level, TileMaps, 528, 528);
     this.player = new Player(level, TileMaps, 100, 100, this.ctx);
     this.camera.follow(this.player);
   }
@@ -150,7 +150,6 @@ class Map {
       firstLayer.push(row);
     }
     TileMaps.levels[level].layers[0] = firstLayer;
-
     let secondLayer = [];
     let innerMap = this.addTrees(level);
     secondLayer.push(new Array(size).fill(5));
@@ -187,6 +186,7 @@ class Map {
 
     for (var c = startCol; c <= endCol; c++) {
         for (var r = startRow; r <= endRow; r++) {
+
             var tile = TileMaps.getTile(this.level,layer, c, r);
             var x = (c - startCol) * TileMaps.tsize + offsetX;
             var y = (r - startRow) * TileMaps.tsize + offsetY;
@@ -236,7 +236,7 @@ class Map {
     this.drawLayer(0);
     this.drawGrid();
     this.drawLayer(1);
-    this.player.gameLoop();
+    // this.player.gameLoop();
   }
 
 }

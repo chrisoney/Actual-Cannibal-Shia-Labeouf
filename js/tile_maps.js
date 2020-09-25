@@ -3,7 +3,9 @@ module.exports = {
   tsize: 66,
   levels: { },
   getTile: function (level, layer, col, row) {
-    return this.levels[level].layers[layer][row][col];
+    if (col < this.levels[level].cols && row < this.levels[level].rows){
+      return this.levels[level].layers[layer][row][col];
+    }
   },
   isSolidXY: function (level, x, y) {
       var col = Math.floor((x - 6) / this.tsize);
