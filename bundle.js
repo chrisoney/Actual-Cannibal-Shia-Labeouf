@@ -53,6 +53,7 @@
 	});
 	
 	let level = 1;
+	let diff_level = 0.5;
 	
 	function playPause(){
 	  document.addEventListener("keydown", (e) => {
@@ -72,9 +73,51 @@
 	  const tipScreen = document.getElementById('tip-screen');
 	  tipScreen.style.visibility = "visible";
 	  setTimeout( () => {
-	    document.addEventListener("keydown", run)
+	    document.addEventListener("keydown", difficulty)
 	  }, 500);
 	  document.removeEventListener("keydown", tutorial);
+	}
+	
+	function difficulty(){
+	  const difficultyScreen = document.getElementById('difficulty');
+	  const easy = document.getElementById('easy');
+	  difficultyScreen.style.visibility = "visible";
+	  easy.classList.add('highlight');
+	
+	  const diffLevels = ['easy', 'medium', 'hard'];
+	  const diffEles = [];
+	  diffLevels.forEach((diff) => {
+	    diffEles.push(document.getElementById(diff))
+	  })
+	  diffEles.forEach((ele) => {
+	    ele.addEventListener("click", ()=> {
+	      const others = document.getElementsByClassName("difficulty-level");
+	      for (let i = 0; i < others.length; i++){
+	        others[i].classList.remove('highlight');
+	      }
+	      switch(ele.id){
+	        case 'easy':
+	          diff_level = 0.5;
+	          break;
+	        case 'medium':
+	          diff_level = 1;
+	          break;
+	        case 'hard':
+	          diff_level = 1.5;
+	          break;
+	        default:
+	          break;
+	      }
+	      ele.classList.add('highlight');
+	    })
+	  })
+	  setTimeout( () => {
+	    document.addEventListener("keydown", run)
+	  }, 500);
+	  document.removeEventListener("keydown", difficulty);
+	  // diffEles.forEach((ele) => {
+	  //   ele.removeEventListener("click", );
+	  // })
 	}
 	
 	function next(){
@@ -116,7 +159,7 @@
 	  for (let screen of game_screens) {
 	    screen.style.visibility = "hidden";
 	  }
-	  window.GameView = new GameView(canvas,level, win, lose, next);
+	  window.GameView = new GameView(canvas,level, diff_level, win, lose, next);
 	  window.GameView.start();
 	  document.removeEventListener("keydown", run);
 	}
@@ -130,10 +173,10 @@
 	
 	
 	class GameView {
-	  constructor(canvas, level, win, lose, next){
+	  constructor(canvas, level, diff_level, win, lose, next){
 	    this.canvas = canvas;
 	    this.ctx = canvas.getContext("2d");
-	    this.map = new Map(canvas, level);
+	    this.map = new Map(canvas, level, diff_level);
 	    this.player = this.map.player;
 	    this.camera = this.map.camera;
 	    this.playing = true;
@@ -235,7 +278,7 @@
 	const TileMaps = __webpack_require__(6)
 	
 	class Map {
-	  constructor(canvas, level){
+	  constructor(canvas, level, diff_level){
 	    this.level = level;
 	    this.canvas = canvas;
 	    this.ctx = canvas.getContext('2d');
@@ -245,7 +288,7 @@
 	    this.generateLevels(level);
 	
 	    this.camera = new Camera(level, TileMaps, 528, 528);
-	    this.player = new Player(level, TileMaps, 100, 100, this.ctx);
+	    this.player = new Player(level, diff_level, TileMaps, 100, 100, this.ctx);
 	    this.camera.follow(this.player);
 	  }
 	  generateObstacles(level){
@@ -483,8 +526,9 @@
 	const Shia = __webpack_require__(4)
 	
 	class Player {
-	  constructor(level, map, x, y, ctx) {
+	  constructor(level, diff_level, map, x, y, ctx) {
 	    this.level = level;
+	    this.diff_level = diff_level;
 	    this.game_width = 528;
 	    this.game_height = 528;
 	    this.img = new Image();
@@ -552,10 +596,8 @@
 	        this.map.isSolidXY(this.level, left, bottom);
 	    if (collision){
 	      if (dirX < 0){
-	        console.log('up')
 	        if (this.shia && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
 	      } else if (dirX > 0){
-	        console.log('down')
 	        if (this.shia && this.screenX === 264 ){this.shia.sX += this.movement_speed};
 	      }
 	      this.colliding = true;
@@ -579,11 +621,11 @@
 	    this.map.isSolidXY(this.level, right, bottom) ||
 	    this.map.isSolidXY(this.level, left, bottom);
 	    if (collision){
-	      if (dirY < 0){
-	        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-	      } else if (dirY > 0){
-	        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-	      }
+	      // if (dirY < 0){
+	      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+	      // } else if (dirY > 0){
+	      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+	      // }
 	      this.colliding = true;
 	    } else {
 	      this.position = {x: old_pos.x, y: old_pos.y};
@@ -611,7 +653,7 @@
 	    } else if (search.includes('no keys')){
 	      this.text_box.src = "./images/no_keys.png";
 	    } else if (search.includes('surprise') && this.shia === false){
-	      this.shia = new Shia(this.level, this.map, this.screenX, this.screenY, this.ctx, this);
+	      this.shia = new Shia(this.level, this.diff_level, this.map, this.screenX, this.screenY, this.ctx, this);
 	      this.shia_surprise = true;
 	      document.getElementById("tips").innerHTML = `<img src="./images/shia_surprise.png" alt="shia"/>`;
 	      window.setTimeout(() => {
@@ -742,8 +784,9 @@
 
 	
 	class Shia {
-	  constructor(level, map, pX, pY, ctx, player){
+	  constructor(level, diff_level, map, pX, pY, ctx, player){
 	    this.level = level;
+	    this.diff_level = diff_level;
 	    this.map = map;
 	    this.ctx = ctx;
 	    this.player = player
@@ -789,7 +832,7 @@
 	    this.width = 18;
 	    this.height = 32;
 	    
-	    this.movement_speed = 2 + (0.8 * this.level);
+	    this.movement_speed = 2 + (0.5 * this.level * this.diff_level);
 	
 	    this.has_attacked = false;
 	  }

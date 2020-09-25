@@ -3,10 +3,10 @@ const TileMaps = require('./tile_maps')
 
 
 class GameView {
-  constructor(canvas, level, win, lose, next){
+  constructor(canvas, level, diff_level, win, lose, next){
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.map = new Map(canvas, level);
+    this.map = new Map(canvas, level, diff_level);
     this.player = this.map.player;
     this.camera = this.map.camera;
     this.playing = true;

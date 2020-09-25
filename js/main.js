@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let level = 1;
+let diff_level = 0.5;
 
 function playPause(){
   document.addEventListener("keydown", (e) => {
@@ -26,9 +27,51 @@ function tutorial(){
   const tipScreen = document.getElementById('tip-screen');
   tipScreen.style.visibility = "visible";
   setTimeout( () => {
-    document.addEventListener("keydown", run)
+    document.addEventListener("keydown", difficulty)
   }, 500);
   document.removeEventListener("keydown", tutorial);
+}
+
+function difficulty(){
+  const difficultyScreen = document.getElementById('difficulty');
+  const easy = document.getElementById('easy');
+  difficultyScreen.style.visibility = "visible";
+  easy.classList.add('highlight');
+
+  const diffLevels = ['easy', 'medium', 'hard'];
+  const diffEles = [];
+  diffLevels.forEach((diff) => {
+    diffEles.push(document.getElementById(diff))
+  })
+  diffEles.forEach((ele) => {
+    ele.addEventListener("click", ()=> {
+      const others = document.getElementsByClassName("difficulty-level");
+      for (let i = 0; i < others.length; i++){
+        others[i].classList.remove('highlight');
+      }
+      switch(ele.id){
+        case 'easy':
+          diff_level = 0.5;
+          break;
+        case 'medium':
+          diff_level = 1;
+          break;
+        case 'hard':
+          diff_level = 1.5;
+          break;
+        default:
+          break;
+      }
+      ele.classList.add('highlight');
+    })
+  })
+  setTimeout( () => {
+    document.addEventListener("keydown", run)
+  }, 500);
+  document.removeEventListener("keydown", difficulty);
+  // diffEles.forEach((ele) => {
+  //   ele.removeEventListener("click", );
+  // })
 }
 
 function next(){
@@ -70,7 +113,7 @@ function run() {
   for (let screen of game_screens) {
     screen.style.visibility = "hidden";
   }
-  window.GameView = new GameView(canvas,level, win, lose, next);
+  window.GameView = new GameView(canvas,level, diff_level, win, lose, next);
   window.GameView.start();
   document.removeEventListener("keydown", run);
 }

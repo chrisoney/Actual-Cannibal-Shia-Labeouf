@@ -1,7 +1,8 @@
 
 class Shia {
-  constructor(level, map, pX, pY, ctx, player){
+  constructor(level, diff_level, map, pX, pY, ctx, player){
     this.level = level;
+    this.diff_level = diff_level;
     this.map = map;
     this.ctx = ctx;
     this.player = player
@@ -47,7 +48,7 @@ class Shia {
     this.width = 18;
     this.height = 32;
     
-    this.movement_speed = 2 + (0.8 * this.level);
+    this.movement_speed = 2 + (0.5 * this.level * this.diff_level);
 
     this.has_attacked = false;
   }

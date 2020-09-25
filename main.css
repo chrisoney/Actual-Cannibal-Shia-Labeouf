@@ -111,7 +111,7 @@ h2 {
   font-size: 30px;
 }
 
-#lose-screen, #win-screen, #next-screen, #tip-screen {
+#lose-screen, #win-screen, #next-screen, #tip-screen, #difficulty {
   visibility: hidden;
 }
 
@@ -163,6 +163,15 @@ h2 {
 }
 
 .tip {
-  font-size: 20px;
+  font-size: 24px;
   text-align: left;
+}
+
+.difficulty-level {
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.highlight {
+  color: red;
 }

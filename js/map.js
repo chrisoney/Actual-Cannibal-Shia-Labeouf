@@ -3,7 +3,7 @@ const Camera = require('./camera')
 const TileMaps = require('./tile_maps')
 
 class Map {
-  constructor(canvas, level){
+  constructor(canvas, level, diff_level){
     this.level = level;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -13,7 +13,7 @@ class Map {
     this.generateLevels(level);
 
     this.camera = new Camera(level, TileMaps, 528, 528);
-    this.player = new Player(level, TileMaps, 100, 100, this.ctx);
+    this.player = new Player(level, diff_level, TileMaps, 100, 100, this.ctx);
     this.camera.follow(this.player);
   }
   generateObstacles(level){

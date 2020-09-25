@@ -2,8 +2,9 @@
 const Shia = require('./shia')
 
 class Player {
-  constructor(level, map, x, y, ctx) {
+  constructor(level, diff_level, map, x, y, ctx) {
     this.level = level;
+    this.diff_level = diff_level;
     this.game_width = 528;
     this.game_height = 528;
     this.img = new Image();
@@ -71,10 +72,8 @@ class Player {
         this.map.isSolidXY(this.level, left, bottom);
     if (collision){
       if (dirX < 0){
-        console.log('up')
         if (this.shia && this.screenX === 264 ){this.shia.sX -= this.movement_speed};
       } else if (dirX > 0){
-        console.log('down')
         if (this.shia && this.screenX === 264 ){this.shia.sX += this.movement_speed};
       }
       this.colliding = true;
@@ -98,11 +97,11 @@ class Player {
     this.map.isSolidXY(this.level, right, bottom) ||
     this.map.isSolidXY(this.level, left, bottom);
     if (collision){
-      if (dirY < 0){
-        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-      } else if (dirY > 0){
-        if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
-      }
+      // if (dirY < 0){
+      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+      // } else if (dirY > 0){
+      //   if (this.shia && this.screenY === 264 ){this.shia.sY -= this.movement_speed};
+      // }
       this.colliding = true;
     } else {
       this.position = {x: old_pos.x, y: old_pos.y};
@@ -130,7 +129,7 @@ class Player {
     } else if (search.includes('no keys')){
       this.text_box.src = "./images/no_keys.png";
     } else if (search.includes('surprise') && this.shia === false){
-      this.shia = new Shia(this.level, this.map, this.screenX, this.screenY, this.ctx, this);
+      this.shia = new Shia(this.level, this.diff_level, this.map, this.screenX, this.screenY, this.ctx, this);
       this.shia_surprise = true;
       document.getElementById("tips").innerHTML = `<img src="./images/shia_surprise.png" alt="shia"/>`;
       window.setTimeout(() => {
