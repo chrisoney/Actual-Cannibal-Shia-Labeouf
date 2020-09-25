@@ -175,3 +175,17 @@ h2 {
 .highlight {
   color: red;
 }
+
+.personal-site span{
+  color: white;
+  transition: .2s ease-in-out;
+}
+
+.personal-site a{
+  text-decoration: none;
+}
+
+.personal-site:hover span {
+  cursor: pointer;
+  font-size: 24px;
+}
