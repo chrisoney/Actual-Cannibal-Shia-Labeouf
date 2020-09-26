@@ -29,12 +29,14 @@ h2 {
 }
 
 #controls{
+  padding-left: 10px;
   font-size: 24px;
   margin-left: 20px;
   height: 512px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 #player-info{
@@ -170,10 +172,54 @@ h2 {
 .difficulty-level {
   cursor: pointer;
   font-size: 40px;
+  position: relative;
 }
-
 .highlight {
   color: red;
+}
+.highlight .drip {
+  opacity: 0;
+  position:absolute;
+  left: 40.5%;
+  width: 3px;
+  height: 5px;
+  background-color: red;
+  animation: drop 3s infinite;
+}
+.drip:nth-child(1){
+  left: 36%;
+  animation-delay: 1.2s;
+}
+.drip:nth-child(2){
+  left: 40.5%;
+  animation-delay: 0s;
+}
+.drip:nth-child(3){
+  left: 46%;
+  animation-delay: 1s;
+}
+.drip:nth-child(4){
+  left: 52%;
+  animation-delay: 2s;
+}
+.drip:nth-child(5){
+  left: 57.3%;
+  animation-delay: .3s;
+}
+.drip:nth-child(6){
+  left: 64.3%;
+  animation-delay: 1.7s;
+}
+
+@keyframes drop {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 50px;
+    opacity: 0;
+  }
 }
 
 .personal-site span{
