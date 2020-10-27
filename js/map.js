@@ -55,7 +55,7 @@ class Map {
 
   addTrees(level) {
     let dimensions = 9 + (level * 3) - 2;
-    let maxTunnels = dimensions * 3;
+    let maxPaths = dimensions * 3;
     let maxLength = dimensions - 2;
     let map = [];
     for (var i = 0; i < dimensions; i++){
@@ -66,37 +66,37 @@ class Map {
       map.push(row);
     }
     let currentRow = 0;
-    let currentColumn = 0;
+    let currentCol = 0;
     let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-    let lastDirection = [];
-    let randomDirection;
-    while (maxTunnels && dimensions && maxLength) {
+    let prevDir = [];
+    let newDir;
+    while (maxPaths && dimensions && maxLength) {
 
 
       do {
-         randomDirection = directions[Math.floor(Math.random() * directions.length)];
-      } while ((randomDirection[0] === -lastDirection[0] && randomDirection[1] === -lastDirection[1]) || (randomDirection[0] === lastDirection[0] && randomDirection[1] === lastDirection[1]));
+         newDir = directions[Math.floor(Math.random() * directions.length)];
+      } while ((newDir[0] === -prevDir[0] && newDir[1] === -prevDir[1]) || (newDir[0] === prevDir[0] && newDir[1] === prevDir[1]));
 
       var randomLength = Math.ceil(Math.random() * maxLength),
-        tunnelLength = 0;
+        pathLength = 0;
 
-      while (tunnelLength < randomLength) {
-        if (((currentRow === 0) && (randomDirection[0] === -1)) ||
-            ((currentColumn === 0) && (randomDirection[1] === -1)) ||
-            ((currentRow === dimensions - 1) && (randomDirection[0] === 1)) ||
-            ((currentColumn === dimensions - 1) && (randomDirection[1] === 1))) {
+      while (pathLength < randomLength) {
+        if (((currentRow === 0) && (newDir[0] === -1)) ||
+            ((currentCol === 0) && (newDir[1] === -1)) ||
+            ((currentRow === dimensions - 1) && (newDir[0] === 1)) ||
+            ((currentCol === dimensions - 1) && (newDir[1] === 1))) {
           break;
         } else {
-          map[currentRow][currentColumn] = 0;
-          currentRow += randomDirection[0];
-          currentColumn += randomDirection[1];
-          tunnelLength++;
+          map[currentRow][currentCol] = 0;
+          currentRow += newDir[0];
+          currentCol += newDir[1];
+          pathLength++;
         }
       }
 
-      if (tunnelLength) {
-        lastDirection = randomDirection;
-        maxTunnels--;
+      if (pathLength) {
+        prevDir = newDir;
+        maxPaths--;
       }
     }
     return map;
